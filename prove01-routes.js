@@ -30,8 +30,8 @@ const requestHandler = (req, res) => {
             console.log(parsedBody.split('=')[1]);
         });
         res.statusCode = 302;
-        res.setHeader('Location' , '/users');
-        res.end();
+        res.setHeader('Location' , '/users'); //works for changing the landing location, which I don't know if
+        res.end();                              // we were allowed to do that but I wanted to.
     }
 }
 
