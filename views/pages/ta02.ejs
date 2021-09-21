@@ -13,12 +13,26 @@
           <%= title %>
         </h1>
         <p>This is the placeholder for Team Activity 02</p>
+        <form action="/ta02/addUser" method="POST">
+          <label for="username">Enter a username</label><br>
+          <input type="text" name="username">
+          <button type="submit">Add User</button>
+        </form>
+
+        <form action="/ta02/removeUser" method="POST">
+          <label for="removeUsername">Enter a User to Remove</label><br>
+          <input type="text" name="removeUsername">
+          <button type="submit">Remove User</button>
+        </form>
+
+        <% for(let user of users) { %>
+          <p>
+            <%= user.name %>
+          </p>
+          <% } %>
       </div>
     </div>
-    <div class="container">
-
-    </div>
-
+  
 
 </body>
 
