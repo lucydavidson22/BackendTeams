@@ -13,6 +13,40 @@
           <%= title %>
         </h1>
         <p>This is the placeholder for Team Activity 03</p>
+        <% if (data.length> 0) { %>
+        <p>
+        <table>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Tags</th>
+          </tr>
+          <% for(var i=0; i<data.length; i++) { %>
+            <tr>
+              <td>
+                <img width="100px"src='<%= data[i].imageUrl %>' alt='item image'>
+              </td>
+              <td>
+                <%= data[i].name %>
+              </td>
+              <td>
+                <%= data[i].description %>
+              </td>
+              <td>
+                <%= '$' + data[i].price %>
+              </td>
+              <td>
+                <%= data[i].tags %>
+              </td>
+            </tr>
+          <% } %>
+        </table>
+        </p>
+        <% } else { %>
+          <p>No items found</p>
+          <% } %>
       </div>
     </div>
     <div class="container">
