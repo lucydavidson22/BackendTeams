@@ -24,8 +24,10 @@ const ta02Routes = require('./routes/ta02');
 const ta03Routes = require('./routes/ta03');
 const ta04Routes = require('./routes/ta04');
 const ta05Routes = require('./routes/ta05');
+const prove8Routes = require('./routes/pr08');
+const prove1Routes = require('./routes/pr01');
 
-const pa01Routes = require('./routes/prove01-routes.js');
+// const pr01Routes = require('./routes/pr01.js');
 
 app
 // .use(session({style:'', counter:''}))
@@ -43,6 +45,8 @@ app
   .use('/ta03', ta03Routes)
   .use('/ta04', ta04Routes)
   .use('/ta05', ta05Routes)
+  .use('/pr01', prove1Routes)
+  .use('/pr08', prove8Routes)
   .get('/', (req, res, next) => {
     // This is the primary index, always handled last.
     res.render('pages/index', {

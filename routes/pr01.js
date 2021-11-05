@@ -37,19 +37,16 @@ const requestHandler = (req, res) => {
     }
     if(url === '/create-user') {
         const body = [];
-        req.on('data', chunk => {
+            req.on('data', chunk => {
             body.push(chunk);
         });
-        req.on('end', () =>{
+        req.on('end', () => {
             const parsedBody = Buffer.concat(body).toString();
-            const Username = parsedBody.split('=')[1];
-
-            console.log(parsedBody.split('=')[1]);
-            users.push(Username);
+            console.log(parsedBody.split('=')[1]); // username=whatever-the-user-entered
         });
         res.statusCode = 302;
-        res.setHeader('Location' , '/users'); //works for changing the landing location, which I don't know if
-        res.end();                              // we were allowed to do that but I wanted to.
-    }
+        res.setHeader('Location', '/');
+        res.end();
+  }
 }
 module.exports = requestHandler;
