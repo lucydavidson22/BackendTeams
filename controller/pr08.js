@@ -1,14 +1,11 @@
-// Controller for W08
 const https = require('https');
 
-const ITEMS_PER_PAGE = 10; // Limit of 10 items per page.
-
 const renderIndex = (req, res, json) => {
-  let searchedItem = req.body.searchValue || req.query.searchValue || ''; // Handle for GET, POST or neither
-  let page = req.query.page || 1; // Grab our page number, 1 if undefined
+  let searchedItem = req.body.itemSearch || req.query.itemSearch || '';
+  let page = req.query.page || 1;
 
-  const indexStart = (page - 1) * ITEMS_PER_PAGE; // Item index to start on...
-  const indexEnd = page * ITEMS_PER_PAGE;
+  const indexStart = (page - 1) * 10;
+  const indexEnd = page * 10;
 
   const filteredData = global.jsonResponse.filter((x) =>
     x.name.toLowerCase().includes(searchedItem.toLowerCase())
@@ -16,18 +13,17 @@ const renderIndex = (req, res, json) => {
 
   let ta03info = {
     data: filteredData.slice(indexStart, indexEnd), 
-    path: '/ta03',
+    path: '/pr08',
     title: 'Lesson 3 Prove Assignment',
     searchedItem: searchedItem,
     page: page,
-    numPages: Math.ceil(filteredData.length / ITEMS_PER_PAGE),
+    numPages: Math.ceil(filteredData.length / 10),
   };
 
   res.render('../views/pages/pr08', ta03info);
 };
 
 exports.processJson = (req, res, next) => {
-  // read json
   var url = 'https://byui-cse.github.io/cse341-course/lesson03/items.json';
 
   https
@@ -40,16 +36,14 @@ exports.processJson = (req, res, next) => {
 
       response.on('end', function () {
         global.jsonResponse = JSON.parse(body);
-        // Simplifying W03 rendering...
         renderIndex(req, res, global.jsonResponse);
       });
     })
     .on('error', function (e) {
-      console.log('Got an error: ', e);
+      console.log('Error: ', e);
     });
 };
 
-// New code for W08...
 exports.getIndex = (req, res, next) => {
-  renderIndex(req, res, global.jsonResponse); // Render page.
+  renderIndex(req, res, global.jsonResponse); 
 };

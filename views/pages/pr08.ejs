@@ -9,10 +9,10 @@
     <% include ../includes/nav.ejs %>
       <div class="container">
         <form action="/pr08" method="POST" class="form-inline">
-          <input type="text" name="searchValue" placeholder="Search by Title" class="form-control" style="width:300px">
-          <button type="submit" class="btn btn-primary">Search</button>
+          <input type="text" name="itemSearch" placeholder="Search by Title" class="form-control" style="width:300px">
+          <button type="submit" class="btn searchButton">Search</button>
           <% if (searchedItem.length > 0) { %>
-            <a type="button" href="/pr08" class="btn btn-default">Clear Search Results</a>
+            <a type="button" href="/pr08" class="btn clearButton">Clear Search Results</a>
             <h3>Showing search results for: <%= searchedItem %></h3>
             <% } %>
         </form>
@@ -41,10 +41,9 @@
             <% } %>
 
       </div>
-      <!-- Pagination button generation -->
       <form class="actions container">
         <% for(var i=1; i <=numPages; i++) { %>
-          <a href="?page=<%= i %><%= (searchedItem) ? `&searchValue=${searchedItem}` :  "" %>" class="btn <%= (page==i) ? 'btn-primary' : 'btn-default' %>">
+          <a href="?page=<%= i %><%= (searchedItem) ? `&itemSearch=${searchedItem}` :  "" %>" class="btn <%= (page==i) ? 'searchButton' : 'clearButton' %>">
             <%= i %>
           </a>
           <% } %>
